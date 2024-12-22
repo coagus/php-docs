@@ -1,0 +1,26 @@
+<?php
+$saldos = [];
+        
+$vecino = [1, 2, 123];
+$saldos[0] = $vecino;
+         
+$vecino = [3, 4, 456];
+$saldos[1] = $vecino;
+
+$vecino = [5, 6, 789];
+$saldos[2] = $vecino;
+    
+        
+        header('Content-Type: text/csv');
+        header("Content-disposition: attachment; filename=\"saldos.csv\""); 
+         
+        //preparar el wrapper de salida
+        $outputBuffer = fopen("php://output", 'w');
+         
+        //volcamos el contenido del array en formato csv
+        foreach($saldos as $val) {
+            fputcsv($outputBuffer, $val);
+        }
+        //cerramos el wrapper
+        fclose($outputBuffer);
+?>
